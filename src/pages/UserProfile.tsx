@@ -16,7 +16,7 @@ const UserProfile: React.FC = () => {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/api/v1/profile", {
+        const response = await axios.get("https://vp-garments-production.up.railway.app/api/v1/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data);
@@ -44,7 +44,7 @@ const UserProfile: React.FC = () => {
     
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:5000/api/v1/profile", formData, {
+      await axios.put("https://vp-garments-production.up.railway.app/api/v1/profile", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSuccessMessage("Profile updated successfully!");
