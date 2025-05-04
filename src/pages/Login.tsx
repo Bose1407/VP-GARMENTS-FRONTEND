@@ -50,7 +50,7 @@ const Login: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/login", formData);
+      const response = await axios.post("https://vp-garments-production.up.railway.app/api/v1/login", formData);
       const { token } = response.data; // Only store the token
       localStorage.setItem("token", token); // Save token to localStorage
 
