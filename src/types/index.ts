@@ -3,7 +3,7 @@ import { Product, CartItem } from "../types";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api/v2" });
+const API = axios.create({ baseURL: "https://vp-garments.netlify.app/api/v2" });
 
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
