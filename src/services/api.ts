@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Product, CartItem } from "../types";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api/v2" });
+const API = axios.create({ baseURL: "https://vp-garments-production.up.railway.app/api/v2" });
 
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
