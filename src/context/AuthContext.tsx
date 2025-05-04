@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
 
         // Fetch user details from the backend
-        const response = await axios.get("https://vp-garments.netlify.app/api/v1/user", {
+        const response = await axios.get("https://vp-garments-production.up.railway.app/api/v1/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
