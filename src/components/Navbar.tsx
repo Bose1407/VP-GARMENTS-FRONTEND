@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { User, LogOut } from "lucide-react";
+import { User, LogOut, Menu, X } from "lucide-react";
 import Container from "./layout/Container";
 import Button from "./ui/Button";
 import { cn } from "../utils/cn";
@@ -42,12 +42,20 @@ const Navbar: React.FC = () => {
       <Container>
         <nav className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="font-display text-2xl font-bold tracking-tight text-neutral-900"
           >
             VP-Garments
           </Link>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-2 text-neutral-700 hover:text-neutral-900 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -98,7 +106,10 @@ const Navbar: React.FC = () => {
             {isAuthenticated ? (
               <>
                 {/* User Profile Icon */}
-                <Link to="/profile" className="p-2 text-neutral-700 hover:text-neutral-900 transition-colors">
+                <Link
+                  to="/profile"
+                  className="p-2 text-neutral-700 hover:text-neutral-900 transition-colors"
+                >
                   <User size={20} />
                 </Link>
                 <Button
@@ -130,6 +141,99 @@ const Navbar: React.FC = () => {
             )}
           </div>
         </nav>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white shadow-md rounded-lg mt-2 p-4 space-y-4">
+            <Link
+              to="/"
+              className={cn(
+                "block text-sm font-medium transition-colors hover:text-brand-500",
+                isActive("/") ? "text-brand-600" : "text-neutral-700"
+              )}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/products"
+              className={cn(
+                "block text-sm font-medium transition-colors hover:text-brand-500",
+                isActive("/products") ? "text-brand-600" : "text-neutral-700"
+              )}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Products
+            </Link>
+            <Link
+              to="/cart"
+              className={cn(
+                "block text-sm font-medium transition-colors hover:text-brand-500",
+                isActive("/cart") ? "text-brand-600" : "text-neutral-700"
+              )}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Cart
+            </Link>
+
+            {/* Admin Dashboard Link (Visible only for Admins) */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className={cn(
+                  "block text-sm font-medium transition-colors hover:text-brand-500",
+                  isActive("/admin") ? "text-brand-600" : "text-neutral-700"
+                )}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Admin Dashboard
+              </Link>
+            )}
+
+            {/* Mobile Right Menu */}
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/profile"
+                  className="block text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Profile
+                </Link>
+                <button
+                  className="block text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="block text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+                  onClick={() => {
+                    navigate("/login");
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Login
+                </button>
+                <button
+                  className="block text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors"
+                  onClick={() => {
+                    navigate("/signup");
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Sign Up
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </Container>
     </header>
   );
