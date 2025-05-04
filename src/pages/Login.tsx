@@ -66,7 +66,7 @@ const Login: React.FC = () => {
 
       // Redirect based on role
       if (role === "admin") {
-        navigate("/admin"); 
+        navigate("/"); 
         window.location.reload();// Redirect to admin dashboard
       } else {
         console.log("Navigating to /");
