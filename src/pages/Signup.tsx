@@ -57,7 +57,7 @@ const Signup: React.FC = () => {
     
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/v1/signup", formData);
+      await axios.post("https://vp-garments-production.up.railway.app/api/v1/signup", formData);
       navigate("/login", { state: { message: "Account created successfully! Please log in." } });
     } catch (err: any) {
       const errorMessage = err.response?.data?.msg || "Signup failed. Please try again.";
