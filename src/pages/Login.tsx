@@ -55,7 +55,7 @@ const Login: React.FC = () => {
       localStorage.setItem("token", token); // Save token to localStorage
 
       // Fetch user details (including role) from the backend
-      const userResponse = await axios.get("http://localhost:5000/api/v1/user", {
+      const userResponse = await axios.get("https://vp-garments-production.up.railway.app/api/v1/user", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
