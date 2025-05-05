@@ -36,7 +36,7 @@ const ProductDetails: React.FC = () => {
       alert(`${product.name} has been added to your cart!`);
     } catch (err) {
       console.error("Error adding product to cart:", err);
-      alert("Failed to add product to cart. Please try again.");
+      alert("Failed to add product to cart. Please try again after Login.");
     }
   };
 
